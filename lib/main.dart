@@ -10,8 +10,14 @@ void main() {
   );
 
   runApp(Document(
-    title: 'admin_panel',
+    title: 'Admin Panel - Screen Data Broadcaster',
     styles: styles,
+    head: [
+      script([],
+          src: 'https://kit.fontawesome.com/3198643e95.js',
+          attributes: {'crossorigin': 'anonymous'}
+      )
+    ],
     body: App(),
   ));
 }
