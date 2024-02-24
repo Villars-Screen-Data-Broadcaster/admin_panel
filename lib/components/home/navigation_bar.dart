@@ -1,173 +1,42 @@
 import 'package:jaspr/jaspr.dart';
 
+
+// Colors
 const marine = Color.rgb(15, 20, 35);
 const darkMarine = Color.rgb(10, 10, 20);
 
+
+// Styles
+const Styles leftComponentStyle = Styles.combine([
+  Styles.box(
+      width: Unit.percent(50),
+      height: Unit.percent(50),
+      display: Display.flex,
+      radius: BorderRadius.circular(Unit.pixels(5))
+  )
+]);
+
+const Styles rightComponentStyle = Styles.combine([
+
+]);
+
+
 class SidebarNavigation extends StatelessComponent {
   @override
-  Iterable<Component> build(BuildContext context) sync* {
-    yield section([
-      Header(),
-      SidebarButton(ButtonIcon.selected('house'), 'Accueil', '/'),
-      SidebarButton(ButtonIcon('folder'), 'Fichiers', '/files'),
-      SidebarButton(ButtonIcon('desktop'), 'Ecrans', '/files')
-    ],
-    styles: Styles.combine([
-        Styles.box(
-          width: Unit.vw(25),
-          height: Unit.vh(100),
-          display: Display.flex,
-          shadow: BoxShadow(offsetX: Unit.zero, offsetY: Unit.zero, blur: Unit.pixels(10)),
-        ),
-        Styles.flexbox(
-            direction: FlexDirection.column,
-            alignItems: AlignItems.center
-        ),
-        Styles.background(color: darkMarine)
-      ])
-    );
-  }
-}
-
-
-class Header extends StatelessComponent {
-  @override
   Iterable<Component> build(BuildContext context) {
     return [
-      section([
-        h1([
-          FontAwesomeIcon(
-              icon: 'sliders',
-              styles: Styles.box(margin: EdgeInsets.only(right: Unit.pixels(15)))
-          ),
-          text('Menu - Admin Panel'),
+      section(
+        [
+          Header()
         ],
-            styles: Styles.text(color: Colors.white, fontWeight: FontWeight.lighter)
-        ),
-        CloseButton()
-      ],
-          styles: Styles.combine([
-            Styles.flexbox(
-                justifyContent: JustifyContent.spaceBetween,
-                alignItems: AlignItems.center
-            ),
-            Styles.box(
-                height: Unit.pixels(100),
-                width: Unit.percent(80),
-                padding: EdgeInsets.symmetric(horizontal: Unit.percent(10))
-            ),
-            Styles.background(color: marine)
-          ])
-      )
-    ];
-  }
-}
-
-
-class CloseButton extends StatefulComponent {
-  @override
-  State<StatefulComponent> createState() => CloseButtonState();
-}
-
-
-class CloseButtonState extends State<CloseButton> {
-  static const defaultTextColor = Colors.white;
-  static const defaultBackgroundColor = darkMarine;
-  static const defaultShadow = BoxShadow(offsetX: Unit.zero, offsetY: Unit.zero);
-
-  Color textColor = defaultTextColor;
-  Color backgroundColor = defaultBackgroundColor;
-  BoxShadow shadow = defaultShadow;
-
-  void hover() => setState(() {
-    textColor = defaultBackgroundColor;
-    backgroundColor = defaultTextColor;
-    shadow = BoxShadow(
-        offsetX: Unit.pixels(8),
-        offsetY: Unit.pixels(8),
-        color: darkMarine
-    );
-  });
-
-  void leave() => setState(() {
-    textColor = defaultTextColor;
-    backgroundColor = defaultBackgroundColor;
-    shadow = defaultShadow;
-  });
-
-  @override
-  Iterable<Component> build(BuildContext context) {
-    return [
-      button([
-        FontAwesomeIcon(
-            icon: 'xmark',
-            styles: Styles.text(
-                fontSize: Unit.em(1.8),
-                color: textColor
-            )
-        ),
-      ],
-          events: {
-            'mouseover': (event) => hover(),
-            'mouseleave': (event) => leave()
-          },
-          styles: SidebarState.defaultState.style
-      )
-    ];
-  }
-}
-
-
-enum SidebarState {
-  defaultState(Styles.combine([
-      Styles.box(
-        border: Border.all(BorderSide(width: Unit.zero)),
-        width: Unit.pixels(50),
-        height: Unit.pixels(50),
-        radius: BorderRadius.circular(Unit.pixels(50)),
-        transition: Transition('', duration: 200),
-        cursor: Cursor.pointer
-      ),
-      Styles.background(color: marine)
-    ])
-  );
-
-  final Styles style;
-
-  const SidebarState(this.style);
-}
-
-
-class SidebarButton extends StatelessComponent {
-  final ButtonIcon icon;
-  final String content;
-  final String redirection;
-
-  SidebarButton(this.icon, this.content, this.redirection);
-
-  @override
-  Iterable<Component> build(BuildContext context) {
-    return [
-      a([
-        icon,
-        text(content)
-      ],
-      href: redirection,
-      styles: Styles.combine([
-          Styles.text(
-              color: icon.textColor,
-              decoration: TextDecoration(line: TextDecorationLine.none),
-              fontFamily: FontFamily('Comfortaa'),
-              fontSize: Unit.em(1.3),
-          ),
-          Styles.background(color: icon.backgroundColor),
+        styles: Styles.combine([
           Styles.box(
-              width: Unit.percent(96),
-              padding: EdgeInsets.all(Unit.percent(2)),
-              display: Display.flex,
-              overflow: Overflow.hidden
+              width: Unit.vw(25),
+              height: Unit.vh(100),
+              display: Display.flex
           ),
-          Styles.flexbox(alignItems: AlignItems.center)
+          Styles.flexbox(justifyContent: JustifyContent.center),
+          Styles.background(color: darkMarine)
         ])
       )
     ];
@@ -175,32 +44,63 @@ class SidebarButton extends StatelessComponent {
 }
 
 
-class ButtonIcon extends StatelessComponent {
-  final String icon;
-  final Color textColor;
-  final Color backgroundColor;
-
-  ButtonIcon(this.icon)
-      : textColor = Colors.white, backgroundColor = darkMarine;
-
-  ButtonIcon.selected(this.icon)
-      : textColor = darkMarine, backgroundColor = Colors.white;
-
+class Header extends StatelessComponent {
   @override
   Iterable<Component> build(BuildContext context) {
-    return [
-      FontAwesomeIcon(
-          icon: icon,
+    return [section( // ComponentPair
+      [
+        LeftComponentWrapper(img(src: 'assets/img/lycee.jpg', styles: leftComponentStyle)),
+        p(
+          [text('VSBD - Admin Panel')],
           styles: Styles.combine([
-            Styles.box(
-              margin: EdgeInsets.only(right: Unit.percent(5)),
-              padding: EdgeInsets.all(Unit.pixels(15)),
+            Styles.text(
+                color: Colors.white,
+                fontFamily: FontFamily('Comfortaa'),
+                fontSize: Unit.em(1.3)
             ),
-            Styles.background(color: backgroundColor),
-            Styles.text(color: textColor)
+            Styles.raw({'user-select': 'none'})
           ])
-      )
-    ];
+        )
+        // RightComponentWrapper(h1([text('VSBD - Admin Panel')]))
+      ],
+      styles: Styles.combine([
+        Styles.box(
+            width: Unit.percent(100),
+            height: Unit.pixels(100),
+            display: Display.flex
+        ),
+        Styles.flexbox(alignItems: AlignItems.center),
+        Styles.background(color: marine)
+      ])
+    )];
+  }
+}
+
+
+// class ComponentPair
+
+
+class LeftComponentWrapper extends StatelessComponent {
+  final Component _component;
+
+  LeftComponentWrapper(this._component);
+
+  @override
+  Iterable<Component> build(BuildContext context) sync* {
+    yield section(
+      [_component],
+      styles: Styles.combine([
+        Styles.box(
+          width: Unit.pixels(100),
+          height: Unit.pixels(100),
+          display: Display.flex
+        ),
+        Styles.flexbox(
+            alignItems: AlignItems.center,
+            justifyContent: JustifyContent.center
+        )
+      ])
+    );
   }
 }
 
