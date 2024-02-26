@@ -13,6 +13,10 @@ const Styles leftComponentStyle = Styles.combine([
       height: Unit.percent(50),
       display: Display.flex,
       radius: BorderRadius.circular(Unit.pixels(5))
+  ),
+  Styles.flexbox(
+      alignItems: AlignItems.center,
+      justifyContent: JustifyContent.center
   )
 ]);
 
@@ -51,33 +55,36 @@ abstract class ZippableComponentState extends State<ZippableComponent> implement
 
 // Labeled Components
 class LabeledComponent extends ZippableComponent {
-  LabeledComponent({required Component component, required String label, double fontSize = 1.0})
-      : super(_LabeledComponentState(ComponentFrame(component), label, fontSize));
+  LabeledComponent({required String href, required Component component, required String label, double fontSize = 1.15, Color backgroundColor = darkMarine, required double transitionDelay, double transition = transition})
+      : super(_LabeledComponentState(href, ComponentFrame(component), label, fontSize, backgroundColor, transitionDelay, transition));
 }
 
 class _LabeledComponentState extends ZippableComponentState {
-  final ComponentFrame _leftComponent;
-  final String _rawText;
+  final String _href;
+  final ComponentFrame _componentFrame;
+  final String _text;
   final double _fontSize;
+  final Color _backgroundColor;
+  final double _transitionDelay;
+  final double _transition;
   Component _label;
 
-  _LabeledComponentState(this._leftComponent, String rawText, double fontSize)
-      : _rawText = rawText,
-        _fontSize = fontSize,
-        _label = p(
-            [text(rawText)],
-            styles: Styles.box(
-                position: Position.absolute(),
-                transform: Transform.translate(x: Unit.pixels(-100)),
-                opacity: 0.0
-            )
-        );
+  _LabeledComponentState(this._href, this._componentFrame, this._text, this._fontSize, this._backgroundColor, this._transitionDelay, this._transition)
+      : _label = a(
+      [text(_text)],
+      href: _href,
+      styles: Styles.box(
+          position: Position.absolute(),
+          transform: Transform.translate(x: Unit.pixels(-100)),
+          opacity: 0.0
+      )
+  );
 
   @override
   Iterable<Component> build(BuildContext context) {
     return [section(
         [
-          _leftComponent,
+          _componentFrame,
           _label
         ],
         styles: Styles.combine([
@@ -87,7 +94,7 @@ class _LabeledComponentState extends ZippableComponentState {
               display: Display.flex
           ),
           Styles.flexbox(alignItems: AlignItems.center),
-          Styles.background(color: marine)
+          Styles.background(color: _backgroundColor)
         ])
     )];
   }
@@ -95,8 +102,9 @@ class _LabeledComponentState extends ZippableComponentState {
   @override
   void zip() {
     setState(() {
-      _label = p(
-          [text(_rawText)],
+      _label = a(
+          [text(_text)],
+          href: _href,
           styles: Styles.box(
               position: Position.absolute(),
               transform: Transform.translate(x: Unit.pixels(-100)),
@@ -109,18 +117,19 @@ class _LabeledComponentState extends ZippableComponentState {
   @override
   void unzip() {
     setState(() {
-      _label = p(
-          [text(_rawText)],
+      _label = a(
+          [text(_text)],
+          href: _href,
           styles: Styles.combine([
             Styles.text(
                 color: Colors.white,
                 fontFamily: FontFamily('Comfortaa'),
-                fontSize: Unit.em(_fontSize)
+                fontSize: Unit.em(_fontSize),
+                decoration: TextDecoration(line: TextDecorationLine.none)
             ),
             Styles.box(
                 position: Position.absolute(left: Unit.pixels(100)),
-                // transform: Transform.translate(x: Unit.pixels(100)),
-                transition: Transition('', duration: transition, delay: transition)
+                transition: Transition('', duration: _transition, delay: _transitionDelay)
             ),
             Styles.raw({'user-select': 'none'})
           ])
