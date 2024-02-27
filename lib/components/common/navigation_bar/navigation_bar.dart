@@ -1,4 +1,4 @@
-import 'package:admin_panel/components/home/navigation_bar/sections.dart';
+import 'package:admin_panel/components/common/navigation_bar/sections.dart';
 import 'package:jaspr/jaspr.dart';
 
 import 'common.dart';
