@@ -5,15 +5,15 @@ import 'common.dart';
 import 'header.dart';
 
 
-class SidebarNavigation extends ZippableComponent {
-  SidebarNavigation() : super(_SidebarNavigationState());
+class SideNavigationMenu extends ZippableComponent {
+  SideNavigationMenu() : super(_SideNavigationMenuState());
 }
 
-class _SidebarNavigationState extends ZippableComponentState {
+class _SideNavigationMenuState extends ZippableComponentState {
   final List<ZippableComponent> _components;
   Unit _width;
 
-  _SidebarNavigationState()
+  _SideNavigationMenuState()
       : _components = [
             Header(),
             Section.selected(
