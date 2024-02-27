@@ -12,9 +12,9 @@ const styles = [
         fontFamily: FontFamily.list([FontFamily('Roboto'), FontFamilies.sansSerif]),
       ),
       Styles.box(
-        width: Unit.percent(100),
+        width: Unit.auto,
         height: Unit.percent(100),
-        margin: EdgeInsets.zero,
+        margin: EdgeInsets.only(left: Unit.pixels(100)),
         padding: EdgeInsets.zero,
       ),
     ]),
