@@ -25,18 +25,6 @@ class HomePage extends StatelessComponent {
         fontSize: Unit.em(1.5)
     );
 
-    const buttonStyle = Styles.combine([
-      Styles.text(
-          color: Colors.white,
-          decoration: TextDecoration(line: TextDecorationLine.none)
-      ),
-      Styles.box(
-          padding: EdgeInsets.all(Unit.pixels(15)),
-          radius: BorderRadius.all(Radius.circular(Unit.pixels(4)))
-      ),
-      Styles.background(color: Color.hex('#49b7f3'))
-    ]);
-
     // TODO: Add style (it's ugly rn)
     yield table(
       [
