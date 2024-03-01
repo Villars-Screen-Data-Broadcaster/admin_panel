@@ -16,7 +16,8 @@ void main() {
       script([],
           src: 'https://kit.fontawesome.com/3198643e95.js',
           attributes: {'crossorigin': 'anonymous'}
-      )
+      ),
+      link(href: 'assets/img/admin.png', rel: 'icon', type: 'image/png')
     ],
     body: App(),
   ));
