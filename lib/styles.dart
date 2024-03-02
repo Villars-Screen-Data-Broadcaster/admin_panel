@@ -14,9 +14,15 @@ const styles = [
       Styles.box(
         width: Unit.auto,
         height: Unit.percent(100),
-        margin: EdgeInsets.only(left: Unit.pixels(100)),
         padding: EdgeInsets.zero,
+        margin: EdgeInsets.zero
       ),
     ]),
   ),
+  StyleRule(selector: Selector.tag('html'), styles: Styles.box(
+    margin: EdgeInsets.only(left: Unit.pixels(100)),
+  )),
+  StyleRule(selector: Selector.tag('body'), styles: Styles.box(
+    padding: EdgeInsets.all(Unit.pixels(50)),
+  ))
 ];
