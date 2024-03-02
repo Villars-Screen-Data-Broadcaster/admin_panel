@@ -6,33 +6,53 @@ import 'header.dart';
 
 
 class SideNavigationMenu extends ZippableComponent {
-  SideNavigationMenu() : super(_SideNavigationMenuState());
+  SideNavigationMenu(String index) : super(_SideNavigationMenuState(index));
 }
 
 class _SideNavigationMenuState extends ZippableComponentState {
   final List<ZippableComponent> _components;
   Unit _width;
 
-  _SideNavigationMenuState()
+  _SideNavigationMenuState(String index)
       : _components = [
             Header(),
-            Section.selected(
-                icon: 'home',
-                label: 'Accueil',
-                href: ''
-            ),
-            Section(
-                icon: 'file',
-                label: 'Fichiers',
-                href: 'files',
-                index: 2
-            ),
-            Section(
-                icon: 'desktop',
-                label: 'Ecrans',
-                href: 'screens',
-                index: 3
-            ),
+            index == 'home'
+                ? Section.selected(
+                    icon: 'home',
+                    label: 'Accueil',
+                    href: '/'
+                )
+                : Section(
+                    icon: 'home',
+                    label: 'Accueil',
+                    href: '/'
+                ),
+            index == 'files'
+                ? Section.selected(
+                    icon: 'file',
+                    label: 'Fichiers',
+                    href: '/files',
+                    index: 2
+                )
+                : Section(
+                    icon: 'file',
+                    label: 'Fichiers',
+                    href: '/files',
+                    index: 2
+                ),
+            index == 'screens'
+                ? Section.selected(
+                    icon: 'desktop',
+                    label: 'Ecrans',
+                    href: '/screens',
+                    index: 3
+                )
+                : Section(
+                    icon: 'desktop',
+                    label: 'Ecrans',
+                    href: '/screens',
+                    index: 3
+                )
         ],
         _width = Unit.pixels(100);
 
