@@ -1,13 +1,13 @@
 import 'package:jaspr/jaspr.dart';
 
-import '../common/navigation_bar/navigation_bar.dart';
-import '../common/static_components.dart';
+import 'common/navigation_bar/navigation_bar.dart';
+import 'common/static_components.dart';
 
 
 class HomePage extends StatelessComponent {
   @override
   Iterable<Component> build(BuildContext context) sync* {
-    yield SideNavigationMenu();
+    yield SideNavigationMenu('home');
 
     yield PageHeader(
         icon: 'sliders',
