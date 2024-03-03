@@ -17,7 +17,8 @@ void main() {
           src: 'https://kit.fontawesome.com/3198643e95.js',
           attributes: {'crossorigin': 'anonymous'}
       ),
-      link(href: 'assets/img/admin.png', rel: 'icon', type: 'image/png')
+      link(href: 'assets/img/admin.png', rel: 'icon', type: 'image/png'),
+      link(href: 'assets/css/navigation_bar.css', rel: 'stylesheet', type: 'text/css')
     ],
     body: App(),
   ));
