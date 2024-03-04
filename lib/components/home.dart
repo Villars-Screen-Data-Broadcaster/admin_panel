@@ -7,7 +7,7 @@ import 'common/static_components.dart';
 class HomePage extends StatelessComponent {
   @override
   Iterable<Component> build(BuildContext context) sync* {
-    yield SideNavigationMenu('home');
+    yield SideNavigationMenu(index: 'home');
 
     yield PageHeader(
         icon: 'sliders',
