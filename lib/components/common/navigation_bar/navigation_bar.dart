@@ -41,6 +41,15 @@ class SideNavigationMenu extends StatelessComponent {
             ),
             LabeledComponent(
                 component: FontAwesomeIcon.extraClasses(
+                    icon: 'rainbow',
+                    classes: 'component'
+                ),
+                label: 'Animations',
+                href: '/animation-scheme',
+                selected: index == 'animation-scheme'
+            ),
+            LabeledComponent(
+                component: FontAwesomeIcon.extraClasses(
                     icon: 'desktop',
                     classes: 'component'
                 ),
