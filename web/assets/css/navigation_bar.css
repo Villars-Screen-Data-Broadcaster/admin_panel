@@ -1,0 +1,133 @@
+:root {
+    --nav-bar-background: #041235;
+    --nav-bar-header-background: #0d205a;
+
+    --nav-bar-transition: .2s;
+    --nav-bar-delayed-transition: var(--nav-bar-transition) .2s;
+}
+
+#nav-bar {
+    width: 100px;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+
+    background-color: var(--nav-bar-background);
+
+    transition: var(--nav-bar-transition);
+}
+
+#nav-bar:hover {
+    width: 25vw;
+
+    box-shadow: 2px 0 15px black;
+}
+
+#nav-bar .labeled-component {
+    width: 100%;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+
+    text-decoration: none;
+    color: white;
+
+    transition: background-color var(--nav-bar-transition);
+}
+
+#nav-bar:hover .labeled-component .label {
+    transform: translateX(0);
+    opacity: 100%;
+
+    transition: transform var(--nav-bar-delayed-transition),
+        opacity var(--nav-bar-delayed-transition);
+}
+
+#nav-bar .labeled-component .component {
+    width: 60px;
+    height: 35px;
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    font-size: 1.4em;
+}
+
+#nav-bar .labeled-component .component::after {
+    content: '';
+
+    height: 75%;
+    width: 0;
+
+    position: absolute;
+    left: 0;
+
+    border-radius: 0 15px 15px 0;
+
+    background-color: var(--nav-bar-header-background);
+
+    transition: var(--nav-bar-transition);
+}
+
+#nav-bar .labeled-component.selected .component::after {
+    width: 10px;
+
+    background-color: white;
+}
+
+#nav-bar .labeled-component:hover {
+    background-color: white;
+
+    color: var(--nav-bar-background);
+}
+
+#nav-bar .labeled-component:hover .component::after {
+    width: 10px;
+}
+
+#nav-bar .labeled-component.selected:hover .component::after {
+    background-color: var(--nav-bar-header-background);
+}
+
+#nav-bar .labeled-component .label {
+    font-family: 'Comfortaa', serif;
+
+    position: absolute;
+    left: 100px;
+
+    transform: translateX(-25px);
+    opacity: 0;
+}
+
+#nav-bar .labeled-component.header {
+    height: 100px;
+
+    background-color: var(--nav-bar-header-background);
+}
+
+#nav-bar .labeled-component.header .component {
+    width: 60px;
+    height: 60px;
+    padding: 20px;
+
+    border-radius: 50%;
+}
+
+#nav-bar .labeled-component.header .label {
+    font-size: 1.2em;
+}
+
+#nav-bar .labeled-component.header:hover {
+    color: white;
+}
