@@ -18,7 +18,8 @@ void main() {
           attributes: {'crossorigin': 'anonymous'}
       ),
       link(href: 'assets/img/admin.png', rel: 'icon', type: 'image/png'),
-      link(href: 'assets/css/navigation_bar.css', rel: 'stylesheet', type: 'text/css')
+      link(href: 'assets/css/navigation_bar.css', rel: 'stylesheet', type: 'text/css'),
+      link(href: 'assets/css/home.css', rel: 'stylesheet', type: 'text/css'),
     ],
     body: App(),
   ));

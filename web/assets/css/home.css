@@ -1,0 +1,70 @@
+#landing-page {
+    height: 100vh;
+    width: calc(100vw - 100px);
+
+    position: relative;
+
+    margin-left: 100px;
+
+    font-family: 'Ubuntu', sans-serif;
+
+    background-color: var(--nav-bar-header-background);
+}
+
+#landing-page .floating {
+    padding: 30px;
+
+    z-index: 2;
+
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(130, 153, 195, .75);
+}
+
+#landing-page .header {
+    height: 20vh;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 50px;
+
+    background-color: white;
+    box-shadow: 0 5px white;
+}
+
+#landing-page .header *:not(.icon, strong) {
+    font-weight: normal;
+}
+
+#landing-page .header .icon {
+    margin-right: 10px;
+}
+
+#landing-page .header .text {
+    width: 50%;
+}
+
+#landing-page .header .text .title {
+    margin-top: 0;
+}
+
+#landing-page .header .screen-stats {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#landing-page .header .screen-stats .screen-count,
+#landing-page .header .screen-stats .time-left {
+    margin: 0;
+}
+
+#landing-page .wave-separator {
+    width: 100%;
+
+    display: flex;
+
+    position: absolute;
+}
