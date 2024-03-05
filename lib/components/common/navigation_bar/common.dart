@@ -37,8 +37,7 @@ class LabeledComponent extends ClassesContainer {
 
 
 class FontAwesomeIcon extends ClassesContainer {
-  FontAwesomeIcon({String type = 'solid', required String icon}) : super('fa-$type fa-$icon');
-  FontAwesomeIcon.extraClasses({String type = 'solid', required super.classes, required String icon}) : super.extraClasses('fa-$type fa-$icon');
+  FontAwesomeIcon({String type = 'solid', required String icon, required super.classes}) : super.extraClasses('fa-$type fa-$icon');
 
   @override
   Iterable<Component> build(BuildContext context) {

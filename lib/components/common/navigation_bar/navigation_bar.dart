@@ -20,11 +20,11 @@ class SideNavigationMenu extends StatelessComponent {
                           src: 'assets/img/lycee.jpg',
                           classes: 'component'
                       ),
-                      label: 'VSDB - Admin Panel',
+                      label: 'VSDB - Panel Administrateur',
                       href: '/'
                   ),
                   LabeledComponent(
-                      component: FontAwesomeIcon.extraClasses(
+                      component: FontAwesomeIcon(
                           icon: 'home',
                           classes: 'component'
                       ),
@@ -33,7 +33,7 @@ class SideNavigationMenu extends StatelessComponent {
                       selected: index == 'home'
                   ),
                   LabeledComponent(
-                      component: FontAwesomeIcon.extraClasses(
+                      component: FontAwesomeIcon(
                           icon: 'file',
                           classes: 'component'
                       ),
@@ -42,7 +42,7 @@ class SideNavigationMenu extends StatelessComponent {
                       selected: index == 'files'
                   ),
                   LabeledComponent(
-                      component: FontAwesomeIcon.extraClasses(
+                      component: FontAwesomeIcon(
                           icon: 'rainbow',
                           classes: 'component'
                       ),
@@ -51,18 +51,18 @@ class SideNavigationMenu extends StatelessComponent {
                       selected: index == 'animation-scheme'
                   ),
                   LabeledComponent(
-                      component: FontAwesomeIcon.extraClasses(
+                      component: FontAwesomeIcon(
                           icon: 'desktop',
                           classes: 'component'
                       ),
-                      label: 'Ecrans',
+                      label: 'Écrans',
                       href: '/screens',
                       selected: index == 'screens'
                   )
                 ]
             ),
             section(
-              [p([text('Villars Screen Data Broadcaster - © 2024 Arthur BARBERA')])],
+              [p([text('Villars Screen Data Broadcaster - &copy; 2024 Arthur BARBERA', rawHtml: true)])],
               classes: 'nav-bar-footer'
             )
           ],
