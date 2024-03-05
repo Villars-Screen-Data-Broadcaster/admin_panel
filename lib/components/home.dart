@@ -1,4 +1,5 @@
 import 'package:admin_panel/components/common/navigation_bar/common.dart';
+import 'package:admin_panel/components/home_components.dart';
 import 'package:jaspr/jaspr.dart';
 
 import 'common/navigation_bar/navigation_bar.dart';
@@ -66,9 +67,45 @@ class HomePage extends StatelessComponent {
             ],
             classes: 'header'
         ),
-        img(
-            src: 'assets/img/home-header-wave.svg',
-            classes: 'wave-separator'
+        section(
+          [
+            h1(
+                [text('Choisissez une section du panel administrateur :')],
+                classes: 'choose-text'
+            ),
+            div(
+              [
+                Card(
+                    title: 'Fichiers',
+                    description: 'Sur cette partie du panneau de configuration, '
+                        'vous serez amené à créer, éditer, supprimer et modifier'
+                        ' les emplacements de vos fichiers.',
+                    button: (label: "C'est parti !", href: '/files'),
+                    classes: 'files'
+                ),
+                Card(
+                    title: 'Animations',
+                    description: 'Sur cette partie du panneau de configuration, '
+                        'vous pourrez créer de nouveaux flux de données nommés '
+                        'afin de les envoyer sur les écrans disponibles.',
+                    button: (label: 'Allons-y !', href: '/animation-scheme'),
+                    classes: 'animation-scheme'
+                ),
+                Card(
+                    title: 'Écrans',
+                    description: 'Sur cette partie du panneau de configuration, '
+                        'vous pourrez modifier les propriétés de vos écrans, '
+                        'telles que leurs tailles et leurs noms. Vous pourrez '
+                        'aussi choisir le flux de données affiché par chaque '
+                        'écran à votre guise.',
+                    button: (label: 'Commençons !', href: '/screens'),
+                    classes: 'screens'
+                ),
+              ],
+              classes: 'cards'
+            )
+          ],
+          classes: 'presentation'
         )
       ],
       id: 'landing-page'

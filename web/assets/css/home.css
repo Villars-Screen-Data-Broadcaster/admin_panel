@@ -1,3 +1,9 @@
+:root {
+    --home-transition: 0.4s;
+
+    --side-padding: 10vw;
+}
+
 #landing-page {
     height: 100vh;
     width: calc(100vw - 100px);
@@ -18,23 +24,28 @@
 
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(130, 153, 195, .75);
+
+    transition: var(--home-transition);
+}
+
+#landing-page .floating:hover {
+    transform: translateY(-5px);
+}
+
+#landing-page *:not(.icon, strong) {
+    font-weight: normal;
 }
 
 #landing-page .header {
-    height: 20vh;
+    height: 20%;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    padding: 50px;
+    padding: 5vh var(--side-padding) 0 var(--side-padding);
 
     background-color: white;
-    box-shadow: 0 5px white;
-}
-
-#landing-page .header *:not(.icon, strong) {
-    font-weight: normal;
 }
 
 #landing-page .header .icon {
@@ -61,10 +72,81 @@
     margin: 0;
 }
 
-#landing-page .wave-separator {
-    width: 100%;
+#landing-page .presentation {
+    height: 70%;
 
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 
-    position: absolute;
+    padding: 0 var(--side-padding);
+
+    background: url("../img/home-header-wave.svg") no-repeat;
+}
+
+#landing-page .presentation .choose-text {
+    margin-top: 0;
+
+    font-size: 1.5em;
+}
+
+#landing-page .presentation .cards {
+    width: 100%;
+    height: 90%;
+
+    display: flex;
+    justify-content: space-around;
+}
+
+#landing-page .presentation .cards .card {
+    width: 25%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    color: white;
+    background-color: white;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .75);
+}
+
+#landing-page .presentation .cards .card.files {
+    background: linear-gradient(135deg, #ec0000, #ff6a6a);
+}
+
+#landing-page .presentation .cards .card.animation-scheme {
+    background: linear-gradient(135deg, #9500ec, #ad6aff);
+}
+
+#landing-page .presentation .cards .card.screens {
+    background: linear-gradient(135deg, #0099ec, #6ac6ff);
+}
+
+#landing-page .presentation .cards .card .title {
+    width: 100%;
+    height: 15%;
+
+    margin: 0;
+
+    text-align: center;
+    font-size: 2em;
+
+    border-bottom: solid 1px rgba(255, 255, 255, .5);
+}
+
+#landing-page .presentation .cards .card .description {
+    text-align: center;
+    font-size: 1.1em;
+    line-height: 2;
+}
+
+#landing-page .presentation .cards .card .redirect {
+    color: var(--nav-bar-background);
+    text-decoration: none;
+    font-size: 1.2em;
+
+    background-color: white;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .75);
 }
