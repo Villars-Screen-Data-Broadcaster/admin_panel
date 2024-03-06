@@ -4,7 +4,7 @@
     --side-padding: 10vw;
 }
 
-#landing-page {
+#home {
     height: 100vh;
     width: calc(100vw - 100px);
 
@@ -17,7 +17,7 @@
     background-color: var(--nav-bar-header-background);
 }
 
-#landing-page .floating {
+#home .floating {
     padding: 30px;
 
     z-index: 2;
@@ -28,15 +28,15 @@
     transition: var(--home-transition);
 }
 
-#landing-page .floating:hover {
+#home .floating:hover {
     transform: translateY(-5px);
 }
 
-#landing-page *:not(.icon, strong) {
+#home *:not(.icon, strong) {
     font-weight: normal;
 }
 
-#landing-page .header {
+#home .header {
     height: 20%;
 
     display: flex;
@@ -49,31 +49,31 @@
     background-color: white;
 }
 
-#landing-page .header .icon {
+#home .header .icon {
     margin-right: 10px;
 }
 
-#landing-page .header .text {
+#home .header .text {
     width: 50%;
 }
 
-#landing-page .header .text .title {
+#home .header .text .title {
     margin-top: 0;
 }
 
-#landing-page .header .screen-stats {
+#home .header .screen-stats {
     height: 50%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-#landing-page .header .screen-stats .screen-count,
-#landing-page .header .screen-stats .time-left {
+#home .header .screen-stats .screen-count,
+#home .header .screen-stats .time-left {
     margin: 0;
 }
 
-#landing-page .presentation {
+#home .presentation {
     height: 70%;
 
     display: flex;
@@ -88,7 +88,7 @@
     background-size: cover;
 }
 
-#landing-page .presentation::before {
+#home .presentation::before {
     content: '';
     width: 50%;
     height: 1px;
@@ -96,11 +96,11 @@
     background-color: rgba(0, 0, 0, .25);
 }
 
-#landing-page .presentation .choose-text {
+#home .presentation .choose-text {
     font-size: 1.5em;
 }
 
-#landing-page .presentation .cards {
+#home .presentation .cards {
     width: 100%;
     height: 85%;
 
@@ -108,7 +108,7 @@
     justify-content: space-around;
 }
 
-#landing-page .presentation .cards .card {
+#home .presentation .cards .card {
     width: 25%;
 
     display: flex;
@@ -121,19 +121,19 @@
     box-shadow: 0 5px 10px rgba(0, 0, 0, .75);
 }
 
-#landing-page .presentation .cards .card.files {
+#home .presentation .cards .card.files {
     background: linear-gradient(135deg, #ec0000, #ff6a6a);
 }
 
-#landing-page .presentation .cards .card.animation-scheme {
+#home .presentation .cards .card.animation-scheme {
     background: linear-gradient(135deg, #9500ec, #ad6aff);
 }
 
-#landing-page .presentation .cards .card.screens {
+#home .presentation .cards .card.screens {
     background: linear-gradient(135deg, #0099ec, #6ac6ff);
 }
 
-#landing-page .presentation .cards .card .title {
+#home .presentation .cards .card .title {
     width: 100%;
     height: 15%;
 
@@ -145,13 +145,13 @@
     border-bottom: solid 1px rgba(255, 255, 255, .5);
 }
 
-#landing-page .presentation .cards .card .description {
+#home .presentation .cards .card .description {
     text-align: center;
     font-size: 1.1em;
     line-height: 2;
 }
 
-#landing-page .presentation .cards .card .redirect {
+#home .presentation .cards .card .redirect {
     color: var(--nav-bar-background);
     text-decoration: none;
     font-size: 1.2em;
@@ -160,18 +160,18 @@
     box-shadow: 0 5px 10px rgba(0, 0, 0, .75);
 }
 
-#landing-page .presentation .cards .card .redirect:hover {
+#home .presentation .cards .card .redirect:hover {
     transform: none;
 }
 
-#landing-page .presentation .cards .card.files .redirect:hover {
+#home .presentation .cards .card.files .redirect:hover {
     background-color: #ffe0e0;
 }
 
-#landing-page .presentation .cards .card.animation-scheme .redirect:hover {
+#home .presentation .cards .card.animation-scheme .redirect:hover {
     background-color: #f4e0ff;
 }
 
-#landing-page .presentation .cards .card.screens .redirect:hover {
+#home .presentation .cards .card.screens .redirect:hover {
     background-color: #E0FFFFFF;
 }
