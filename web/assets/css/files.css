@@ -1,0 +1,35 @@
+#files {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: var(--top-element-padding);
+}
+
+#files .title {
+    margin-top: 0;
+
+    font-size: 1.8em;
+}
+
+#files .description {
+    width: 75%;
+
+    position: relative;
+    padding-top: var(--top-padding);
+
+    text-align: center;
+}
+
+#files .description::before {
+    content: '';
+
+    width: 75%;
+    height: 1px;
+
+    position: absolute;
+    top: 0;
+    left: calc(25% / 2);
+
+    background-color: rgba(0, 0, 0, .25);
+}
