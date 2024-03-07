@@ -108,7 +108,8 @@ class HomePage extends StatelessComponent {
           classes: 'presentation'
         )
       ],
-      id: 'home'
+      id: 'home',
+      classes: 'base-component'
     );
   }
 }

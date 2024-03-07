@@ -1,0 +1,34 @@
+:root {
+    --side-padding: 10vw;
+    --top-padding: 5vh;
+    --top-element-padding: 5vh var(--side-padding) 0 var(--side-padding);
+}
+
+*:not(i, strong) {
+    font-weight: normal;
+}
+
+.floating {
+    padding: 30px;
+
+    z-index: 2;
+
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(130, 153, 195, .75);
+
+    transition: var(--home-transition);
+}
+
+.floating:hover {
+    transform: translateY(-5px);
+}
+
+.base-component {
+    height: 100vh;
+
+    position: relative;
+
+    margin-left: 100px;
+
+    font-family: 'Ubuntu', sans-serif;
+}
