@@ -2,19 +2,28 @@ import 'package:admin_panel/components/common/navigation_bar/common.dart';
 import 'package:jaspr/jaspr.dart';
 
 
-class DirectoryNode extends StatelessComponent {
-  final String label;
-  final String href;
+enum NodeType {
+  file('file'),
+  folder('folder');
 
-  DirectoryNode(this.label, this.href);
+  final String name;
+
+  const NodeType(this.name);
+}
+
+class FileNode extends StatelessComponent {
+  final NodeType type;
+  final String label;
+
+  FileNode(this.type, this.label);
 
   @override
   Iterable<Component> build(BuildContext context) {
     return [
-      a(
+      p(
           [
             FontAwesomeIcon(
-                icon: 'folder',
+                icon: type.name,
                 classes: 'icon'
             ),
             p(
@@ -23,47 +32,54 @@ class DirectoryNode extends StatelessComponent {
             )
           ],
           classes: 'display',
-          href: href
       )
     ];
   }
 }
 
-class DirectoryTree extends StatelessComponent {
-  final DirectoryNode node;
-  final List<Component> children;
+class DirectoryNode extends FileNode {
+  final String href;
+  final List<FileNode> children;
 
-  factory DirectoryTree({required String label, List<DirectoryTree> children = const []}) {
-    final node = DirectoryNode(label, label.toLowerCase().replaceAll(' ', '_'));
+  factory DirectoryNode({required String label, List<FileNode> children = const []}) {
+    String href = label.toLowerCase().replaceAll(' ', '_');
 
-    return children.isEmpty
-        ? DirectoryTree._internalEmpty(node)
-        : DirectoryTree._internal(
-            node,
-            children.map((child) => DirectoryTree._raw(
-                DirectoryNode(child.node.label, '${node.href}-${child.node.href}'),
-                child.children
-            ))
-        );
+    return DirectoryNode._internal(
+        label,
+        href,
+        children.map(
+                (child) => child is DirectoryNode
+                    ? child.buildWithHrefPrefix(href)
+                    : child
+        ).toList(growable: false)
+    );
   }
 
-  DirectoryTree._raw(this.node, this.children);
+  DirectoryNode._internal(String label, this.href, this.children)
+      : super(NodeType.folder, label);
 
-  DirectoryTree._internal(this.node, Iterable<DirectoryTree> children)
-      : assert(children.isNotEmpty, "DirectoryTree children list cannot be empty. Consider using DirectoryTree._internal instead."),
-        children = [
-          node,
-          div(
-              children.toList(growable: false),
-              classes: 'children'
-          )
-        ];
-
-  DirectoryTree._internalEmpty(this.node) : children = [node];
+  DirectoryNode buildWithHrefPrefix(String hrefPrefix) {
+    return DirectoryNode._internal(super.label, '$hrefPrefix-$href', children);
+  }
 
   @override
   Iterable<Component> build(BuildContext context) {
-    return [div(children, classes: 'directory-tree')];
+    return children.isEmpty
+        ? [
+          a(
+              super.build(context).toList(growable: false),
+              href: 'files#$href',
+              classes: 'directory-node'
+          )
+        ]
+        : [
+          a(
+              super.build(context).toList(growable: false),
+              href: 'files#$href',
+              classes: 'directory-node',
+          ),
+          div(children, classes: 'children')
+        ];
   }
 }
 
