@@ -28,25 +28,35 @@ class FilesPage extends StatelessComponent {
               section(
                 [
                   h1(
-                    [text('Dossiers')],
+                    [text('Arborescence')],
                     classes: 'label'
                   ),
                   div(
-                    [
-                      DirectoryTree(
-                          label: 'test',
-                          children: [
-                            DirectoryTree(label: 'foo'),
-                            DirectoryTree(label: 'bar'),
-                          ]
-                      )
-                    ]
+                      [
+                        DirectoryNode(
+                            label: 'test with long title',
+                            children: [
+                              DirectoryNode(label: 'foo'),
+                              DirectoryNode(label: 'bar'),
+                              DirectoryNode(
+                                  label: 'another test yes',
+                                  children: [
+                                    DirectoryNode(label: 'fizz'),
+                                    DirectoryNode(label: 'buzz'),
+                                    FileNode(NodeType.file, 'fizzbuzz')
+                                  ]
+                              ),
+                              FileNode(NodeType.file, 'file')
+                            ]
+                        )
+                      ],
+                      classes: 'body'
                   )
                 ],
-                classes: 'floating fm-container directories'
+                classes: 'fm-container directories'
               ),
             ],
-            classes: 'files-manager'
+            classes: 'file-manager'
           )
         ],
         id: 'files',
