@@ -2,6 +2,8 @@
     --side-padding: 10vw;
     --top-padding: 5vh;
     --top-element-padding: 5vh var(--side-padding) 0 var(--side-padding);
+
+    --floating-box-shadow: 0 5px 15px rgba(130, 153, 195, .75);
 }
 
 *:not(i, strong) {
@@ -14,7 +16,7 @@
     z-index: 2;
 
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(130, 153, 195, .75);
+    box-shadow: var(--floating-box-shadow);
 
     transition: var(--home-transition);
 }
