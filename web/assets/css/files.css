@@ -86,27 +86,71 @@
     overflow: scroll;
 }
 
-#files .file-manager .fm-container .body .directory-node {
+#files .file-manager .fm-container .body .dropdown {
+    display: flex;
+    flex-direction: column;
+}
+
+#files .file-manager .fm-container .body .dropdown > .dir-display {
+    min-width: max-content;
+    display: flex;
+    align-items: center;
+
+    margin: 5px 5px 0 5px;
+
+    border-radius: 10px;
+
+    list-style: none;
+}
+
+#files .file-manager .fm-container .body .dropdown .dir-display:hover {
+    background-color: rgba(234, 240, 250, 0.75);
+}
+
+#files .file-manager .fm-container .body .dropdown .dir-display::-webkit-details-marker,
+#files .file-manager .fm-container .body .dropdown .dir-display::marker {
+    display: none;
+}
+
+#files .file-manager .fm-container .body .dropdown .dir-display .dropdown-button {
+    width: 50px;
+    height: 50px;
+
+    font-size: 1.5em;
+    background-color: transparent;
+    border: none;
+}
+
+#files .file-manager .fm-container .body .dropdown .directory-node {
+    width: 100%;
     display: flex;
     flex-direction: column;
 
     text-decoration: none;
 }
 
-#files .file-manager .fm-container .body .display {
+#files .file-manager .fm-container .body .dropdown .display {
     min-width: max-content;
+    width: calc(100% - 25px);
 
     display: flex;
     align-items: center;
-
-    padding-left: 20px;
-    margin: 5px 5px 0 5px;
+    margin: 0;
 
     color: black;
     border-radius: 10px;
+
+    text-wrap: none;
 }
 
-#files .file-manager .fm-container .body .display:hover {
+#files .file-manager .fm-container .body .dropdown .children > .display {
+    width: calc(100% - 50px);
+    padding: 16px 20px 16px 20px;
+
+    margin: 5px 5px 0 5px;
+}
+
+#files .file-manager .fm-container .body .dropdown .children > .display:hover {
     background-color: rgba(234, 240, 250, 0.75);
 }
 
