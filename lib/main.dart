@@ -22,6 +22,8 @@ void main() {
       link(href: 'assets/css/navigation_bar.css', rel: 'stylesheet', type: 'text/css'),
       link(href: 'assets/css/home.css', rel: 'stylesheet', type: 'text/css'),
       link(href: 'assets/css/files.css', rel: 'stylesheet', type: 'text/css'),
+
+      script([], src: 'assets/js/files.js', defer: true)
     ],
     body: App(),
   ));
