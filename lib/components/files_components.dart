@@ -40,10 +40,7 @@ class _FileComponent extends StatelessComponent {
                 icon: type.name,
                 classes: 'icon'
             ),
-            p(
-                [text(label)],
-                classes: 'label'
-            )
+            text(label)
           ],
           classes: 'display',
       )
@@ -86,6 +83,36 @@ class DirectoryTree extends DirectoryNode {
   }
 }
 
+class ExpandableComponent extends StatelessComponent {
+  final Component label;
+  final Component? nullableDropdown;
+
+  ExpandableComponent({required this.label, Component? dropdown})
+      : nullableDropdown = dropdown;
+
+  @override
+  Iterable<Component> build(BuildContext context) {
+    return [
+      details(
+          [
+            summary(
+                [
+                  button(
+                      [FontAwesomeIcon(icon: 'angle-right', classes: 'dropdown-icon')],
+                      classes: 'dropdown-button'
+                  ),
+                  label
+                ],
+                classes: 'dir-display'
+            ),
+            if (nullableDropdown case final dropdown?) dropdown
+          ],
+          classes: 'dropdown'
+      )
+    ];
+  }
+}
+
 class _DirectoryComponent extends _FileComponent {
   final String href;
   final List<StatelessComponent> children;
@@ -100,12 +127,14 @@ class _DirectoryComponent extends _FileComponent {
   @override
   Iterable<Component> build(BuildContext context) {
     return [
-      a(
-        super.build(context).toList(growable: false),
-        href: 'files#$href',
-        classes: 'directory-node',
-      ),
-      if (children.isNotEmpty) div(children, classes: 'children')
+      ExpandableComponent(
+          label: a(
+              super.build(context).toList(growable: false),
+              href: '#$href',
+              classes: 'directory-node',
+          ),
+          dropdown: children.isNotEmpty ? div(children, classes: 'children') : null,
+      )
     ];
   }
 }
