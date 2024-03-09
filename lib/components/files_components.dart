@@ -19,7 +19,7 @@ class FileNode implements _ComponentTransferrable {
   final NodeType type;
   final String label;
 
-  FileNode(this.type, this.label);
+  FileNode(this.label, [this.type = NodeType.file]);
 
   @override
   StatelessComponent toComponent() => _FileComponent(type, label);

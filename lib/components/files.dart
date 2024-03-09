@@ -46,10 +46,10 @@ class FilesPage extends StatelessComponent {
                                           DirectoryNode(label: 'fizz'),
                                           DirectoryNode(label: 'buzz'),
                                         ],
-                                        files: [FileNode(NodeType.file, 'fizzbuzz')]
+                                        files: [FileNode('fizzbuzz')]
                                     ),
                                   ],
-                                  files: [FileNode(NodeType.file, 'file')]
+                                  files: [FileNode('file')]
                               )
                             ]
                         ).toComponent()
