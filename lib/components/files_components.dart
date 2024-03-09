@@ -11,11 +11,25 @@ enum NodeType {
   const NodeType(this.name);
 }
 
-class FileNode extends StatelessComponent {
+abstract class _ComponentTransferrable {
+  StatelessComponent toComponent();
+}
+
+class FileNode implements _ComponentTransferrable {
   final NodeType type;
   final String label;
 
   FileNode(this.type, this.label);
+
+  @override
+  StatelessComponent toComponent() => _FileComponent(type, label);
+}
+
+class _FileComponent extends StatelessComponent {
+  final NodeType type;
+  final String label;
+
+  _FileComponent(this.type, this.label);
 
   @override
   Iterable<Component> build(BuildContext context) {
@@ -37,49 +51,62 @@ class FileNode extends StatelessComponent {
   }
 }
 
-class DirectoryNode extends FileNode {
-  final String href;
-  final List<FileNode> children;
+class DirectoryNode implements _ComponentTransferrable {
+  final String label;
+  String href;
+  final Iterable<DirectoryNode> subDirectories;
+  final Iterable<FileNode> files;
 
-  factory DirectoryNode({required String label, List<FileNode> children = const []}) {
-    String href = label.toLowerCase().replaceAll(' ', '_');
+  DirectoryNode({required this.label, this.subDirectories = const [], this.files = const []})
+      : href = label.toLowerCase().replaceAll(' ', '_');
 
-    return DirectoryNode._internal(
-        label,
-        href,
-        children.map(
-                (child) => child is DirectoryNode
-                    ? child.buildWithHrefPrefix(href)
-                    : child
-        ).toList(growable: false)
-    );
-  }
+  DirectoryNode._parent({this.subDirectories = const [], this.files = const []})
+      : label = '/', href = '';
 
-  DirectoryNode._internal(String label, this.href, this.children)
-      : super(NodeType.folder, label);
+  set hrefPrefix(String prefix) {
+    href = prefix == '' ? href : '$prefix-$href';
 
-  DirectoryNode buildWithHrefPrefix(String hrefPrefix) {
-    return DirectoryNode._internal(super.label, '$hrefPrefix-$href', children);
+    for (var subDir in subDirectories) {
+      subDir.hrefPrefix = href;
+    }
   }
 
   @override
+  StatelessComponent toComponent() => _DirectoryComponent(label, href, subDirectories, files);
+}
+
+class DirectoryTree extends DirectoryNode {
+  DirectoryTree({super.subDirectories, super.files}) : super._parent();
+
+  @override
+  StatelessComponent toComponent() {
+    super.hrefPrefix = href;
+
+    return _DirectoryComponent(super.label, super.href, super.subDirectories, super.files);
+  }
+}
+
+class _DirectoryComponent extends _FileComponent {
+  final String href;
+  final List<StatelessComponent> children;
+
+  _DirectoryComponent(String label, this.href, Iterable<DirectoryNode> subDirectories, Iterable<FileNode> files)
+      : children = <_ComponentTransferrable>[
+          ...subDirectories,
+          ...files
+        ].map((transferrable) => transferrable.toComponent()).toList(growable: false),
+        super(NodeType.folder, label);
+
+  @override
   Iterable<Component> build(BuildContext context) {
-    return children.isEmpty
-        ? [
-          a(
-              super.build(context).toList(growable: false),
-              href: 'files#$href',
-              classes: 'directory-node'
-          )
-        ]
-        : [
-          a(
-              super.build(context).toList(growable: false),
-              href: 'files#$href',
-              classes: 'directory-node',
-          ),
-          div(children, classes: 'children')
-        ];
+    return [
+      a(
+        super.build(context).toList(growable: false),
+        href: 'files#$href',
+        classes: 'directory-node',
+      ),
+      if (children.isNotEmpty) div(children, classes: 'children')
+    ];
   }
 }
 

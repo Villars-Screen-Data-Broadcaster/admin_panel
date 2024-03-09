@@ -33,22 +33,26 @@ class FilesPage extends StatelessComponent {
                   ),
                   div(
                       [
-                        DirectoryNode(
-                            label: 'test with long title',
-                            children: [
-                              DirectoryNode(label: 'foo'),
-                              DirectoryNode(label: 'bar'),
+                        DirectoryTree(
+                            subDirectories: [
                               DirectoryNode(
-                                  label: 'another test yes',
-                                  children: [
-                                    DirectoryNode(label: 'fizz'),
-                                    DirectoryNode(label: 'buzz'),
-                                    FileNode(NodeType.file, 'fizzbuzz')
-                                  ]
-                              ),
-                              FileNode(NodeType.file, 'file')
+                                  label: 'test with a long title',
+                                  subDirectories: [
+                                    DirectoryNode(label: 'foo'),
+                                    DirectoryNode(label: 'bar'),
+                                    DirectoryNode(
+                                        label: 'another test yes',
+                                        subDirectories: [
+                                          DirectoryNode(label: 'fizz'),
+                                          DirectoryNode(label: 'buzz'),
+                                        ],
+                                        files: [FileNode(NodeType.file, 'fizzbuzz')]
+                                    ),
+                                  ],
+                                  files: [FileNode(NodeType.file, 'file')]
+                              )
                             ]
-                        )
+                        ).toComponent()
                       ],
                       classes: 'body'
                   )
