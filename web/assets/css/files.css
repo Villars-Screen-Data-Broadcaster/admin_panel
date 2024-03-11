@@ -36,7 +36,7 @@
 
 #files .file-manager {
     width: 95%;
-    height: 70%;
+    height: 70vh;
 
     display: flex;
     justify-content: space-between;
@@ -62,7 +62,7 @@
 
 #files .file-manager .fm-container > .label {
     width: 100%;
-    height: 10%;
+    height: 8vh;
 
     display: flex;
     align-items: center;
@@ -77,11 +77,13 @@
     color: white;
 }
 
+#files .file-manager .fm-container > .label + * {
+    margin-top: 8vh;
+}
+
 #files .file-manager .fm-container .body {
     width: 100%;
     height: 85%;
-
-    margin-top: 20%;
 
     overflow: scroll;
 }
