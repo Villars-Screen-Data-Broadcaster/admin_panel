@@ -1,25 +1,24 @@
 const dropdowns = document.querySelectorAll('#files .file-manager .fm-container .body .dropdown')
 
 for (const dropdown of dropdowns) {
-    dropdown.onclick = (event) => {
-        event.preventDefault()
-        event.stopPropagation()
-    }
+    const anchor = dropdown.querySelector('.dir-display > .directory-node')
+
+    anchor.addEventListener('click', () => document.location.href = anchor.href)
+    dropdown.addEventListener('click', (event) => event.preventDefault())
 }
 
-const dropdownButtonSelector = '#files .file-manager .fm-container .body .dropdown .dir-display .dropdown-button'
-const dropdownButtons = document.querySelectorAll(dropdownButtonSelector);
+const buttons = document.querySelectorAll('#files .file-manager .fm-container .body .dropdown .dir-display .dropdown-button')
 
-for (const dropdownButton of dropdownButtons) {
-    dropdownButton.onclick = () => {
-        const dropdown = dropdownButton.parentElement.parentElement;
+for (const button of buttons) {
+    button.addEventListener('click', () => {
+        const dropdown = button.parentElement.parentElement
 
         if (!dropdown.hasAttribute('open')) {
-            dropdownButton.style.transform = 'rotateZ(90deg)'
             dropdown.setAttribute('open', '')
+            button.style.transform = 'rotateZ(90deg)'
         } else {
-            dropdownButton.style.transform = 'rotateZ(0)'
             dropdown.removeAttribute('open')
+            button.style.transform = 'rotateZ(0)'
         }
-    }
+    })
 }
