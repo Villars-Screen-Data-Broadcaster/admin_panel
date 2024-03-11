@@ -1,8 +1,8 @@
 # Admin Panel - Villars Screen Data Broadcaster
 *Software under license GPL v3.0.*
 
-![lycee](https://www.atrium-sud.fr/documents/22015453/25877951/lycee.jpg/01e94c06-ae51-4d17-878d-32beaeeebd73?t=1458658619041)
-  
+![alt text](https://github.com/Villars-Screen-Data-Broadcaster/admin_panel/blob/dev/web/assets/img/lycee.jpg?raw=true)
+
 ---  
 
 > ## Table of contents:
