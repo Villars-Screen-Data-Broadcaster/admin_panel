@@ -1,3 +1,4 @@
+import 'package:admin_panel/components/common/navigation_bar/common.dart';
 import 'package:admin_panel/components/files_components.dart';
 import 'package:jaspr/jaspr.dart';
 
@@ -57,8 +58,47 @@ class FilesPage extends StatelessComponent {
                       classes: 'body'
                   )
                 ],
-                classes: 'fm-container directories'
+                classes: 'fm-container directory-tree'
               ),
+              section(
+                  [
+                    div(
+                        [
+                          h1(
+                              [text('Contenu de <dossier>')],
+                              classes: 'title'
+                          ),
+                          div(
+                              [
+                                button(
+                                    [
+                                      FontAwesomeIcon(
+                                          icon: 'cloud-arrow-up',
+                                          classes: 'icon'
+                                      ),
+                                      text('Envoyer un élément')
+                                    ],
+                                    classes: 'file-button'
+                                ),
+                                button(
+                                    [
+                                      FontAwesomeIcon(
+                                          icon: 'folder-plus',
+                                          classes: 'icon'
+                                      ),
+                                      text('Nouveau dossier')
+                                    ],
+                                    classes: 'file-button'
+                                )
+                              ],
+                              classes: 'button-container'
+                          )
+                        ],
+                        classes: 'label'
+                    ),
+                  ],
+                  classes: 'fm-container directory-content'
+              )
             ],
             classes: 'file-manager'
           )
