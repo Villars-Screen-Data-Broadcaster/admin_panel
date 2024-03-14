@@ -1,4 +1,3 @@
-import 'package:admin_panel/components/common/navigation_bar/common.dart';
 import 'package:admin_panel/components/files_components.dart';
 import 'package:jaspr/jaspr.dart';
 
@@ -70,25 +69,13 @@ class FilesPage extends StatelessComponent {
                           ),
                           div(
                               [
-                                button(
-                                    [
-                                      FontAwesomeIcon(
-                                          icon: 'cloud-arrow-up',
-                                          classes: 'icon'
-                                      ),
-                                      text('Envoyer un élément')
-                                    ],
-                                    classes: 'file-button'
+                                FileButton(
+                                    icon: 'cloud-arrow-up',
+                                    label: 'Envoyer un élément'
                                 ),
-                                button(
-                                    [
-                                      FontAwesomeIcon(
-                                          icon: 'folder-plus',
-                                          classes: 'icon'
-                                      ),
-                                      text('Nouveau dossier')
-                                    ],
-                                    classes: 'file-button'
+                                FileButton(
+                                    icon: 'folder-plus',
+                                    label: 'Nouveau dossier'
                                 )
                               ],
                               classes: 'button-container'
@@ -96,6 +83,31 @@ class FilesPage extends StatelessComponent {
                         ],
                         classes: 'label'
                     ),
+                    div(
+                        [
+                          File(
+                              label: 'test',
+                              size: 2222244444,
+                              creationDate: DateTime.timestamp().add(Duration(days: 30 * 7))
+                          ),
+                          File(
+                              label: 'test',
+                              size: 2222244444,
+                              creationDate: DateTime.timestamp().add(Duration(days: 30 * 7))
+                          ),
+                          File(
+                              label: 'test',
+                              size: 2222244444,
+                              creationDate: DateTime.timestamp().add(Duration(days: 30 * 7))
+                          ),
+                          Directory(
+                              label: 'test',
+                              size: 2222244444,
+                              creationDate: DateTime.timestamp().add(Duration(days: 30 * 7))
+                          ),
+                        ],
+                        classes: 'body'
+                    )
                   ],
                   classes: 'fm-container directory-content'
               )
