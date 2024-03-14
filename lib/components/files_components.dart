@@ -140,13 +140,40 @@ class _DirectoryComponent extends _FileComponent {
 }
 
 
+class FileButton extends StatelessComponent {
+  final String icon;
+  final String? label;
+  final String? classes;
+
+  FileButton({required this.icon, required String this.label, this.classes});
+  FileButton.blank({required this.icon}) : label = null, classes = null;
+
+  @override
+  Iterable<Component> build(BuildContext context) {
+    return [
+      button(
+          [
+            FontAwesomeIcon(
+                icon: icon,
+                classes: label == null ? 'icon blank' : 'icon'
+            ),
+            if (label case final notNullLabel?) text(notNullLabel)
+          ],
+          classes: 'file-button${classes != null ? ' $classes' : ''}'
+      )
+    ];
+  }
+}
+
+
 class File extends _FMComponent {
   File({required super.label, required super.size, required super.creationDate})
       : super(
           FontAwesomeIcon(
               icon: 'file',
               classes: 'icon file'
-          )
+          ),
+          additionalButton: FileButton.blank(icon: 'download')
       );
 }
 
@@ -163,10 +190,19 @@ class Directory extends _FMComponent {
 class _FMComponent extends StatelessComponent {
   final FontAwesomeIcon icon;
   final String label;
-  final String size;
-  final String creationDate;
+  final int size;
+  final DateTime creationDate;
+  final FileButton? additionalButton;
 
-  _FMComponent(this.icon, {required this.label, required this.size, required this.creationDate});
+  String get sizeToString => switch (size) {
+    < 1e3 => '${size.toStringAsPrecision(3)} b',
+    >= 1e3 && < 1e6 => '${(size / 1e3).toStringAsPrecision(3)} Kb',
+    >= 1e6 && < 1e9 => '${(size / 1e6).toStringAsPrecision(3)} Mb',
+    >= 1e9 && < 1e12 => '${(size / 1e9).toStringAsPrecision(3)} Gb',
+    _ => '${(size / 1e12).toStringAsPrecision(3)} Tb'
+  };
+
+  _FMComponent(this.icon, {required this.label, required this.size, required this.creationDate, this.additionalButton});
 
   @override
   Iterable<Component> build(BuildContext context) {
@@ -184,13 +220,28 @@ class _FMComponent extends StatelessComponent {
                 classes: 'display'
             ),
             p(
-                [text(size)],
+                [text(sizeToString)],
                 classes: 'size'
             ),
             p(
-                [text(creationDate)],
+                [text('${creationDate.day.toString().padLeft(2, '0')}/${creationDate.month.toString().padLeft(2, '0')}/${creationDate.year}')],
                 classes: 'creation-date'
             ),
+            div(
+                [
+                  if (additionalButton case final button?) button,
+                  FileButton(
+                      icon: 'pencil',
+                      label: 'Renommer'
+                  ),
+                  FileButton(
+                      icon: 'trash',
+                      label: 'Supprimer',
+                      classes: 'delete'
+                  )
+                ],
+                classes: 'file-button-container'
+            )
           ],
           classes: 'fm-component'
       )
