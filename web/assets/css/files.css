@@ -178,6 +178,7 @@
 
 #files .file-manager .directory-content .file-button {
     padding: 8px;
+    margin-left: 5px;
 
     font-size: 0.65em;
     font-family: 'Ubuntu', sans-serif;
@@ -201,23 +202,20 @@
 }
 
 #files .file-manager .directory-content .label {
+    width: calc(80% - 5px);
+    padding: 0 calc(10% + 5px);
     justify-content: space-between;
 }
 
 #files .file-manager .directory-content .label .title {
-    margin: 0 0 0 5%;
+    margin: 0;
     padding: 0;
 
     font-size: inherit;
 }
 
 #files .file-manager .directory-content .label .button-container {
-    width: 330px;
-
     display: flex;
-    justify-content: space-between;
-
-    margin: 0 5% 0 0;
 }
 
 #files .file-manager .directory-content .body {
