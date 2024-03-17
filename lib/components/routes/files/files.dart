@@ -1,7 +1,8 @@
-import 'package:admin_panel/components/files_components.dart';
 import 'package:jaspr/jaspr.dart';
 
-import 'common/navigation_bar/navigation_bar.dart';
+import 'package:admin_panel/components/common/navigation_bar/navigation_bar.dart';
+
+import 'components.dart';
 
 
 class FilesPage extends StatelessComponent {

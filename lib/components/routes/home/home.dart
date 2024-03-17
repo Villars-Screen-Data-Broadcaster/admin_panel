@@ -1,8 +1,9 @@
-import 'package:admin_panel/components/common/navigation_bar/common.dart';
-import 'package:admin_panel/components/home_components.dart';
 import 'package:jaspr/jaspr.dart';
 
-import 'common/navigation_bar/navigation_bar.dart';
+import 'package:admin_panel/components/common/navigation_bar/navigation_bar.dart';
+import 'package:admin_panel/components/common/navigation_bar/common.dart';
+
+import 'components.dart';
 
 
 class HomePage extends StatelessComponent {
