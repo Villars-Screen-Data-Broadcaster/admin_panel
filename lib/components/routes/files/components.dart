@@ -12,15 +12,15 @@ enum NodeType {
   const NodeType(this.name);
 }
 
-abstract class _ComponentTransferrable {
+abstract class Node {
   StatelessComponent toComponent();
 }
 
-class FileNode implements _ComponentTransferrable {
+class FileNode implements Node {
   final NodeType type;
   final String label;
 
-  FileNode(this.label, [this.type = NodeType.file]);
+  FileNode({required this.label, this.type = NodeType.file});
 
   @override
   StatelessComponent toComponent() => _FileComponent(type, label);
@@ -49,7 +49,7 @@ class _FileComponent extends StatelessComponent {
   }
 }
 
-class DirectoryNode implements _ComponentTransferrable {
+class DirectoryNode implements Node {
   final String label;
   String href;
   final Iterable<DirectoryNode> subDirectories;
@@ -119,7 +119,7 @@ class _DirectoryComponent extends _FileComponent {
   final List<StatelessComponent> children;
 
   _DirectoryComponent(String label, this.href, Iterable<DirectoryNode> subDirectories, Iterable<FileNode> files)
-      : children = <_ComponentTransferrable>[
+      : children = <Node>[
           ...subDirectories,
           ...files
         ].map((transferrable) => transferrable.toComponent()).toList(growable: false),
@@ -167,28 +167,7 @@ class FileButton extends StatelessComponent {
 }
 
 
-class File extends _FMComponent {
-  File({required super.label, required super.size, required super.creationDate})
-      : super(
-          FontAwesomeIcon(
-              icon: 'file',
-              classes: 'icon file'
-          ),
-          additionalButton: FileButton.blank(icon: 'download')
-      );
-}
-
-class Directory extends _FMComponent {
-  Directory({required super.label, required super.size, required super.creationDate})
-      : super(
-          FontAwesomeIcon(
-              icon: 'folder',
-              classes: 'icon folder'
-          )
-      );
-}
-
-class _FMComponent extends StatelessComponent {
+class FileManagerComponent extends StatelessComponent {
   final FontAwesomeIcon icon;
   final String label;
   final int size;
@@ -203,7 +182,7 @@ class _FMComponent extends StatelessComponent {
     _ => '${(size / 1e12).toStringAsPrecision(3)} Tb'
   };
 
-  _FMComponent(this.icon, {required this.label, required this.size, required this.creationDate, this.additionalButton});
+  FileManagerComponent(this.icon, {required this.label, required this.size, required this.creationDate, this.additionalButton});
 
   @override
   Iterable<Component> build(BuildContext context) {
@@ -248,4 +227,25 @@ class _FMComponent extends StatelessComponent {
       )
     ];
   }
+}
+
+class File extends FileManagerComponent {
+  File({required super.label, required super.size, required super.creationDate})
+      : super(
+          FontAwesomeIcon(
+              icon: 'file',
+              classes: 'icon file'
+          ),
+          additionalButton: FileButton.blank(icon: 'download')
+      );
+}
+
+class Directory extends FileManagerComponent {
+  Directory({required super.label, required super.size, required super.creationDate})
+      : super(
+          FontAwesomeIcon(
+              icon: 'folder',
+              classes: 'icon folder'
+          )
+      );
 }
